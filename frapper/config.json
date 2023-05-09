@@ -1,3 +1,4 @@
 {
+    "frapper_db": "frapper_test.db",
     "env_file": "/opt/projects/frapper_app/.env"
 }

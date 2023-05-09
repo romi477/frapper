@@ -11,10 +11,12 @@ with open('frapper/config.json', 'r') as f:
 Env.read_envfile(env_file_path, **config)
 env = Env()
 
-FRAPPER_ID = env.int('TG_FRAPPER_ID')
-PHRASES_ID = env.int('TG_PHRASES_ID')
+FRAPPER_ID = env.int('tg_frapper_id')
+PHRASE_PL_ID = env.int('tg_phrase_pl_id')
 
-TG_API_ID = env.int('TG_API_ID')
-TG_API_HASH = env.str('TG_API_HASH')
-BOT_TOKEN = env.str('FRAPPER_BOT_TOKEN')
-API_URL = env.str('FRAPPER_API_URL', default='http://localhost:8000')
+TG_API_ID = env.int('tg_api_id')
+TG_API_HASH = env.str('tg_api_hash')
+BOT_TOKEN = env.str('frapper_bot_token')
+
+API_URL = env.str('frapper_api_url', default='http://localhost:8000')
+FRAPPER_DB = env.str('frapper_db', default='frapper.db')

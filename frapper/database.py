@@ -1,36 +1,50 @@
+# python3
+
 import sqlite3
+from settings import FRAPPER_DB
 
 
 def create_phrases_table():
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect(FRAPPER_DB)
     cur = conn.cursor()
 
-    query = """
-        CREATE TABLE phrases (
+    query_phrase_meta = """
+        CREATE TABLE phrase_meta (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            message_id INTEGER,
             state CHAR,
-            status BOOLEAN,
+            channel_id CHAR,
+            message_id INTEGER,
+            message_date DATETIME,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            UNIQUE(channel_id, message_id)
+        )
+    """
+    query_phrase_pl = """
+        CREATE TABLE phrase_pl (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            meta_id INTEGER,
+            state CHAR,
+            active BOOLEAN,
             target CHAR,
             target_tag CHAR,
             translate CHAR,
             translate_tag CHAR,
             target_mask CHAR,
             translate_mask CHAR,
+            message_id INTEGER,
+            message_date DATETIME,
             metadata CHAR,
-            width INTEGER,
-            height INTEGER,
-            file_name CHAR,
-            file_index INTEGER,
-            file_date DATETIME,
-            bin_data BLOB
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            UNIQUE(target, target_tag),
+            FOREIGN KEY (meta_id) REFERENCES phrase_meta(id)
         )
     """
-    cur.execute(query)
+
+    cur.execute(query_phrase_meta)
+    cur.execute(query_phrase_pl)
     conn.commit()
     conn.close()
 
 
-create_phrases_table()
-
-# conn = sqlite3.connect('database.db')
+if __name__ == '__main__':
+    create_phrases_table()
