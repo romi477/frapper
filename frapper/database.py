@@ -4,7 +4,7 @@ import sqlite3
 from settings import FRAPPER_DB
 
 
-def create_phrases_table():
+def create_db_tables():
     conn = sqlite3.connect(FRAPPER_DB)
     cur = conn.cursor()
 
@@ -15,6 +15,7 @@ def create_phrases_table():
             channel_id CHAR,
             message_id INTEGER,
             message_date DATETIME,
+            with_error BOOLEAN,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             UNIQUE(channel_id, message_id)
         )
@@ -47,4 +48,4 @@ def create_phrases_table():
 
 
 if __name__ == '__main__':
-    create_phrases_table()
+    create_db_tables()

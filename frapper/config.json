@@ -1,4 +1,8 @@
 {
-    "frapper_db": "frapper_test.db",
-    "env_file": "/opt/projects/frapper_app/.env"
+    "redis_db": 0,
+    "redis_port": 6379,
+    "log_dir": "logs",
+    "frapper_db": "frapper.db",
+    "env_file": "/opt/projects/frapper_app/.env",
+    "frapper_main_host": "https://31a9-95-160-156-120.ngrok-free.app"
 }
